@@ -1,0 +1,42 @@
+name: LLM Cost Check
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  llm-cost-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run LLM Cost Guard
+        uses: salilborkar/llm-cost-guard@v1
+        with:
+          # Directory or file to scan. '.' scans the entire repo recursively.
+          # Change to 'src/' or 'app/' to limit the scan to your source tree.
+          path: '.'
+
+          # How many times per month each LLM call is expected to run in
+          # production. Used to project monthly cost from a per-call estimate.
+          monthly-calls: '30000'
+
+          # Input token count to assume when the prompt size can't be inferred
+          # from source code. Set this to a value typical of your prompts.
+          default-input-tokens: '1000'
+
+          # Output token count to assume when max_tokens isn't set in the call.
+          # Increase this if your use case typically generates long responses.
+          default-output-tokens: '500'
+
+          # Monthly cost ceiling in USD. A warning is added to the report when
+          # the projected monthly total exceeds this value.
+          # Set to '0' to disable the threshold check entirely.
+          cost-threshold: '100'
+
+          # Set to 'true' to block the PR merge when cost-threshold is exceeded.
+          # Requires this workflow to be a required status check in your branch
+          # protection rules. 'false' reports the overage without blocking.
+          fail-on-threshold: 'false'

@@ -1,0 +1,36 @@
+{
+  "_updated": "2026-04-20",
+  "_note": "Prices in USD per 1,000 tokens. On-demand / Pay-As-You-Go rates. Update via PR when providers change pricing.",
+
+  "bedrock/anthropic.claude-3-5-sonnet-20241022-v2:0": { "input_per_1k": 0.003,   "output_per_1k": 0.015   },
+  "bedrock/anthropic.claude-3-5-haiku-20241022-v1:0":  { "input_per_1k": 0.0008,  "output_per_1k": 0.004   },
+  "bedrock/anthropic.claude-3-sonnet-20240229-v1:0":   { "input_per_1k": 0.003,   "output_per_1k": 0.015   },
+  "bedrock/anthropic.claude-3-haiku-20240307-v1:0":    { "input_per_1k": 0.00025, "output_per_1k": 0.00125 },
+  "bedrock/anthropic.claude-3-opus-20240229-v1:0":     { "input_per_1k": 0.015,   "output_per_1k": 0.075   },
+
+  "bedrock/amazon.titan-text-express-v1":              { "input_per_1k": 0.0002,  "output_per_1k": 0.0006  },
+  "bedrock/amazon.titan-text-lite-v1":                 { "input_per_1k": 0.00015, "output_per_1k": 0.0002  },
+  "bedrock/amazon.titan-embed-text-v2:0":              { "input_per_1k": 0.00002, "output_per_1k": 0.0      },
+
+  "bedrock/meta.llama3-8b-instruct-v1:0":              { "input_per_1k": 0.0003,  "output_per_1k": 0.0006  },
+  "bedrock/meta.llama3-70b-instruct-v1:0":             { "input_per_1k": 0.00265, "output_per_1k": 0.0035  },
+  "bedrock/meta.llama3-1-8b-instruct-v1:0":            { "input_per_1k": 0.00022, "output_per_1k": 0.00022 },
+  "bedrock/meta.llama3-1-70b-instruct-v1:0":           { "input_per_1k": 0.00265, "output_per_1k": 0.0035  },
+
+  "bedrock/mistral.mistral-7b-instruct-v0:2":          { "input_per_1k": 0.00015, "output_per_1k": 0.0002  },
+  "bedrock/mistral.mixtral-8x7b-instruct-v0:1":        { "input_per_1k": 0.00045, "output_per_1k": 0.0007  },
+
+  "azure_openai/gpt-4o":                               { "input_per_1k": 0.005,   "output_per_1k": 0.015   },
+  "azure_openai/gpt-4o-2024-11-20":                    { "input_per_1k": 0.0025,  "output_per_1k": 0.01    },
+  "azure_openai/gpt-4o-mini":                          { "input_per_1k": 0.00015, "output_per_1k": 0.0006  },
+  "azure_openai/gpt-4o-mini-2024-07-18":               { "input_per_1k": 0.00015, "output_per_1k": 0.0006  },
+  "azure_openai/gpt-4-turbo":                          { "input_per_1k": 0.01,    "output_per_1k": 0.03    },
+  "azure_openai/gpt-4-turbo-2024-04-09":               { "input_per_1k": 0.01,    "output_per_1k": 0.03    },
+  "azure_openai/gpt-4":                                { "input_per_1k": 0.03,    "output_per_1k": 0.06    },
+  "azure_openai/gpt-35-turbo":                         { "input_per_1k": 0.0005,  "output_per_1k": 0.0015  },
+  "azure_openai/gpt-35-turbo-16k":                     { "input_per_1k": 0.003,   "output_per_1k": 0.004   },
+
+  "azure_openai/text-embedding-3-small":               { "input_per_1k": 0.00002, "output_per_1k": 0.0      },
+  "azure_openai/text-embedding-3-large":               { "input_per_1k": 0.00013, "output_per_1k": 0.0      },
+  "azure_openai/text-embedding-ada-002":               { "input_per_1k": 0.0001,  "output_per_1k": 0.0      }
+}

@@ -1,0 +1,35 @@
+# Pricing last verified: 2026-04-20
+# AWS Bedrock pricing:  https://aws.amazon.com/bedrock/pricing/
+# Azure OpenAI pricing: https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/
+
+aws_bedrock:
+  anthropic.claude-3-5-sonnet-20241022-v2:0:
+    display_name: Claude 3.5 Sonnet v2
+    input_cost_per_1k_tokens: 0.006
+    output_cost_per_1k_tokens: 0.030
+
+  anthropic.claude-3-haiku-20240307-v1:0:
+    display_name: Claude 3 Haiku
+    input_cost_per_1k_tokens: 0.00025
+    output_cost_per_1k_tokens: 0.00125
+
+  amazon.titan-text-express-v1:
+    display_name: Titan Text Express
+    input_cost_per_1k_tokens: 0.0002
+    output_cost_per_1k_tokens: 0.0006
+
+# GPT-4 Turbo excluded — legacy/deprecated on Azure as of 2026. Use GPT-4o instead.
+# GPT-3.5 Turbo excluded — shows N/A pricing on Azure, discontinued.
+azure_openai:
+  # Global deployment pricing. Regional/Data Zone deployments cost ~10% more.
+  gpt-4o-2024-11-20:
+    display_name: GPT-4o (2024-11-20, Global)
+    input_cost_per_1k_tokens: 0.0025
+    output_cost_per_1k_tokens: 0.010
+
+  # $0.15 input / $0.60 output per 1M tokens (Global deployment)
+  # Source: https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/
+  gpt-4o-mini-2024-07-18:
+    display_name: GPT-4o Mini (2024-07-18, Global)
+    input_cost_per_1k_tokens: 0.00015
+    output_cost_per_1k_tokens: 0.0006
