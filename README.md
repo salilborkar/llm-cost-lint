@@ -10,7 +10,7 @@ A GitHub Action that scans Python files for AWS Bedrock and Azure OpenAI API cal
 
 ## Why this exists
 
-Teams regularly merge LLM API calls without knowing what they'll cost at scale — a prompt that looks cheap in development can run into hundreds of dollars a month once real traffic hits it. `llm-cost-guard` catches that at PR review time, when there's still an opportunity to reconsider the model, reduce max_tokens, or question the call frequency — not when the AWS bill arrives.
+Teams regularly merge LLM API calls without knowing what they'll cost at scale — a prompt that looks cheap in development can run into hundreds of dollars a month once real traffic hits it. `llm-cost-lint` catches that at PR review time, when there's still an opportunity to reconsider the model, reduce max_tokens, or question the call frequency — not when the AWS bill arrives.
 
 ---
 
