@@ -1,8 +1,8 @@
-# llm-cost-guard
+# llm-cost-lint
 
-[![CI](https://github.com/salilborkar/llm-cost-guard/actions/workflows/llm-cost-check.yml/badge.svg)](https://github.com/salilborkar/llm-cost-guard/actions/workflows/llm-cost-check.yml)
+[![CI](https://github.com/salilborkar/llm-cost-lint/actions/workflows/llm-cost-check.yml/badge.svg)](https://github.com/salilborkar/llm-cost-lint/actions/workflows/llm-cost-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/salilborkar/llm-cost-guard?style=social)](https://github.com/salilborkar/llm-cost-guard/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/salilborkar/llm-cost-lint?style=social)](https://github.com/salilborkar/llm-cost-lint/stargazers)
 
 A GitHub Action that scans Python files for AWS Bedrock and Azure OpenAI API calls and posts a cost estimate to your PR before the code ships.
 
@@ -19,7 +19,7 @@ Teams regularly merge LLM API calls without knowing what they'll cost at scale �
 When your PR touches a file that contains LLM API calls, the action posts a comment like this:
 
 ```
-## 💰 LLM Cost Guard Report
+## 💰 LLM Cost Lint Report
 
 | Provider     | Model                      | File                              | Line | Tokens (in / out) | Est. Cost / Call | Est. Daily Cost | Est. Monthly Cost |
 |---|---|---|---|---|---|---|---|
