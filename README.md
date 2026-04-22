@@ -57,7 +57,7 @@ Pricing sources: AWS Bedrock · Azure OpenAI
 ```bash
 mkdir -p .github/workflows
 curl -o .github/workflows/llm-cost-check.yml \
-  https://raw.githubusercontent.com/salilborkar/llm-cost-guard/v1/.github/workflows/llm-cost-check.yml
+  https://raw.githubusercontent.com/salilborkar/llm-cost-lint/v1/.github/workflows/llm-cost-check.yml
 ```
 
 **Step 2 — Set your cost threshold**
