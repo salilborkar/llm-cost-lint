@@ -16,37 +16,11 @@ Teams regularly merge LLM API calls without knowing what they'll cost at scale �
 
 ## What it looks like
 
-When your PR touches a file that contains LLM API calls, the action posts a comment like this:
+When your PR touches a file that contains LLM API calls, 'llm-cost-lint' action posts a comment with a detailed breakdown, like this:
 
-```
-## 💰 LLM Cost Lint Report
+![LLM Cost Lint PR comment](docs/demo-pr-comment.png)
 
-| Provider     | Model                      | File                              | Line | Tokens (in / out) | Est. Cost / Call | Est. Daily Cost | Est. Monthly Cost |
-|---|---|---|---|---|---|---|---|
-| AWS Bedrock  | Claude 3.5 Sonnet v2       | src/summariser.py                 | 38   | 1,000† / 500†     | $0.0210          | $21.00          | $630.00           |
-| AWS Bedrock  | Claude 3 Haiku             | src/classifier.py                 | 55   | 1,000† / 500†     | $0.000875        | $0.8750         | $26.25            |
-| Azure OpenAI | GPT-4o (2024-11-20, Global)| src/reviewer.py                   | 70   | 1,000† / 800      | $0.0105          | $10.50          | $315.00           |
-| Azure OpenAI | GPT-4o Mini (2024-07-18)   | src/commit_msg.py                 | 89   | 1,000† / 200      | $0.000270        | $0.2700         | $8.10             |
-| **Total**    |                            |                                   |      |                   | **$0.0326**      | **$32.64**      | **$979.35**       |
-
-⚠️ **Unrecognized models** — could not estimate cost for:
-- `aws_bedrock/anthropic.claude-99-experimental-v1:0`
-
-These calls are excluded from the totals above. Add pricing entries to `config/pricing.yml` to include them.
-
-🚨 **Monthly cost estimate ($979.35) exceeds threshold ($100.00)**
-
-This PR introduces LLM calls whose projected monthly cost is above the configured limit. Review the estimates above before merging.
-
----
-*Generated at 2026-04-21 06:32 UTC · Projection assumes 1,000 calls/day · 30-day month*
-
-† Input tokens defaulted to 1000 where max_tokens was not set in source.
-
-Pricing sources: AWS Bedrock · Azure OpenAI
-
-*Estimates are approximate. Verify before production deployment.*
-```
+See it live in the  [demo repo](https://github.com/salilborkar/llm-cost-lint-demo/pull/2).
 
 ---
 
