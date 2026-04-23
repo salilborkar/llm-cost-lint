@@ -2,7 +2,7 @@
 
 ## Overview
 
-`llm-cost-guard` runs as a Docker-based GitHub Action on every pull request. It walks the changed Python files in the repository, uses Python's `ast` module to find AWS Bedrock and Azure OpenAI SDK call sites, prices each site against a bundled YAML pricing table, and writes a structured Markdown cost report as a PR comment. The tool sits at the point in the development workflow where a human reviewer is already looking at the code — making cost visibility a natural part of the review conversation rather than a separate audit step.
+`llm-cost-lint` runs as a Docker-based GitHub Action on every pull request. It walks the changed Python files in the repository, uses Python's `ast` module to find AWS Bedrock and Azure OpenAI SDK call sites, prices each site against a bundled YAML pricing table, and writes a structured Markdown cost report as a PR comment. The tool sits at the point in the development workflow where a human reviewer is already looking at the code — making cost visibility a natural part of the review conversation rather than a separate audit step.
 
 ---
 

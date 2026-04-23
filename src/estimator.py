@@ -127,7 +127,7 @@ def estimate_calls(
             if key not in unrecognized:
                 unrecognized.append(key)
             warnings.warn(
-                f"llm-cost-guard: no pricing found for {key!r}. "
+                f"llm-cost-lint: no pricing found for {key!r}. "
                 "This call will be excluded from cost totals.",
                 stacklevel=2,
             )

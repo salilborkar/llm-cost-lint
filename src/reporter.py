@@ -50,7 +50,7 @@ def generate_report(
 # ── Sections ─────────────────────────────────────────────────────────────────
 
 def _header() -> str:
-    return "## 💰 LLM Cost Guard Report"
+    return "## 💰 LLM Cost Lint Report"
 
 
 def _summary_table(result: EstimationResult) -> str:

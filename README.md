@@ -60,11 +60,23 @@ curl -o .github/workflows/llm-cost-check.yml \
   https://raw.githubusercontent.com/salilborkar/llm-cost-lint/v1/.github/workflows/llm-cost-check.yml
 ```
 
-**Step 2 — Set your cost threshold**
+**Step 2 — Add the required permissions**
+
+The action posts the cost report as a PR comment, which requires write access to pull requests. Add the following block to your workflow file at the top level (before `jobs:`):
+
+```yaml
+permissions:
+  contents: read
+  pull-requests: write
+```
+
+Without `pull-requests: write`, the GitHub API call to post the comment will return a 403 and the action will log a warning, but the workflow step itself will still pass.
+
+**Step 3 — Set your cost threshold**
 
 Open `.github/workflows/llm-cost-check.yml` and adjust `cost-threshold` to a monthly USD value that makes sense for your project. Set `fail-on-threshold: 'true'` if you want to block merges that exceed it.
 
-**Step 3 — Open a PR**
+**Step 4 — Open a PR**
 
 The action runs automatically on every PR. If your PR touches Python files that contain Bedrock or Azure OpenAI calls, a cost report will be posted as a PR comment.
 
@@ -80,6 +92,7 @@ The action runs automatically on every PR. If your PR touches Python files that 
 | `default-output-tokens` | `500` | Output token count assumed when `max_tokens` isn't set in the call. |
 | `cost-threshold` | `100` | Monthly cost ceiling in USD. A warning is added to the report when exceeded. Set to `0` to disable. |
 | `fail-on-threshold` | `false` | Set to `true` to exit with code 1 when `cost-threshold` is exceeded, blocking the merge. |
+| `post-pr-comment` | `true` | Post the cost report as a comment on the pull request. Requires `pull-requests: write` permission. |
 
 ---
 

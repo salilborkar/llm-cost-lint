@@ -1,5 +1,5 @@
 """
-Simulated LLM API usage for llm-cost-guard parser/estimator tests.
+Simulated LLM API usage for llm-cost-lint parser/estimator tests.
 
 Each function wraps a single SDK call. Comments above each call indicate
 what the parser should detect.

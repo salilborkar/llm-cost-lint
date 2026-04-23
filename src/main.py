@@ -1,5 +1,5 @@
 """
-Entrypoint for the llm-cost-guard GitHub Action.
+Entrypoint for the llm-cost-lint GitHub Action.
 
 Reads configuration from environment variables, scans Python files for LLM
 API calls, estimates costs, and writes a Markdown report to stdout and to
@@ -14,6 +14,7 @@ from pathlib import Path
 
 from estimator import EstimatorConfig, estimate_calls
 from parser import parse_file, LLMCall
+from pr_commenter import post_pr_comment
 from reporter import generate_report
 
 
@@ -91,7 +92,7 @@ def _scan_files(paths: list[Path]) -> list[LLMCall]:
         except Exception as exc:  # noqa: BLE001
             # Log and continue — a parse failure in one file should not prevent
             # the rest of the PR from being analysed.
-            print(f"::warning file={path}::llm-cost-guard: skipping {path} — {exc}", flush=True)
+            print(f"::warning file={path}::llm-cost-lint: skipping {path} — {exc}", flush=True)
     return calls
 
 
@@ -139,6 +140,7 @@ def main() -> None:
     default_output_tokens = _env_int("INPUT_DEFAULT_OUTPUT_TOKENS", 500)
     cost_threshold = _env_float("INPUT_COST_THRESHOLD", 100.0)
     fail_on_threshold = _env_bool("INPUT_FAIL_ON_THRESHOLD", False)
+    should_post_comment = _env_bool("INPUT_POST_PR_COMMENT", True)
 
     # Convert monthly calls to daily for EstimatorConfig.
     calls_per_day = max(1, round(monthly_calls / 30))
@@ -160,18 +162,18 @@ def main() -> None:
     # 3. Discover Python files.
     py_files = _find_python_files(scan_root)
     if not py_files:
-        print("llm-cost-guard: no Python files found under the scan path.", flush=True)
+        print("llm-cost-lint: no Python files found under the scan path.", flush=True)
         _write_github_output("cost-report", "No Python files found.")
         sys.exit(0)
 
-    print(f"llm-cost-guard: scanning {len(py_files)} Python file(s) under '{scan_root}'", flush=True)
+    print(f"llm-cost-lint: scanning {len(py_files)} Python file(s) under '{scan_root}'", flush=True)
 
     # 4. Parse files for LLM call sites.
     calls = _scan_files(py_files)
 
     if not calls:
         no_calls_msg = (
-            "## 💰 LLM Cost Guard Report\n\n"
+            "## 💰 LLM Cost Lint Report\n\n"
             "No LLM API calls detected in the scanned files."
         )
         print(no_calls_msg, flush=True)
@@ -179,7 +181,7 @@ def main() -> None:
         _write_github_step_summary(no_calls_msg)
         sys.exit(0)
 
-    print(f"llm-cost-guard: found {len(calls)} LLM call site(s)", flush=True)
+    print(f"llm-cost-lint: found {len(calls)} LLM call site(s)", flush=True)
 
     # 5. Estimate costs.
     config = EstimatorConfig(
@@ -201,6 +203,9 @@ def main() -> None:
     _write_github_output("cost-report", report)
     _write_github_step_summary(report)
 
+    if os.environ.get("GITHUB_EVENT_NAME") == "pull_request" and should_post_comment:
+        post_pr_comment(report)
+
     # 8. Threshold gate.
     threshold_exceeded = (
         cost_threshold > 0
@@ -209,7 +214,7 @@ def main() -> None:
 
     if threshold_exceeded:
         print(
-            f"::warning::llm-cost-guard: projected monthly cost "
+            f"::warning::llm-cost-lint: projected monthly cost "
             f"${result.total_cost_per_month_usd:.2f} exceeds threshold ${cost_threshold:.2f}",
             flush=True,
         )

@@ -35,7 +35,7 @@ def _estimate_one(cs: CallSite, db: dict, cfg: Config) -> CostEstimate:
     found = rates is not None
     if not found:
         warnings.warn(
-            f"llm-cost-guard: no pricing found for {key!r}, using fallback rate",
+            f"llm-cost-lint: no pricing found for {key!r}, using fallback rate",
             stacklevel=2,
         )
         rates = _FALLBACK_RATE
