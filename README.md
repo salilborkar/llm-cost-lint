@@ -93,6 +93,7 @@ The action runs automatically on every PR. If your PR touches Python files that 
 | `cost-threshold` | `100` | Monthly cost ceiling in USD. A warning is added to the report when exceeded. Set to `0` to disable. |
 | `fail-on-threshold` | `false` | Set to `true` to exit with code 1 when `cost-threshold` is exceeded, blocking the merge. |
 | `post-pr-comment` | `true` | Post the cost report as a comment on the pull request. Requires `pull-requests: write` permission. |
+| `github-token` | `${{ github.token }}` | GitHub token used to post PR comments. Defaults to the workflow's automatic `GITHUB_TOKEN`. |
 
 ---
 
