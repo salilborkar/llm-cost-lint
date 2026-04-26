@@ -16,9 +16,9 @@ def post_pr_comment(markdown_body: str) -> None:
     """
     import requests  # imported here so the module is importable without requests installed
 
-    token = os.environ.get("GITHUB_TOKEN", "")
+    token = os.environ.get("INPUT_GITHUB_TOKEN", "") or os.environ.get("GITHUB_TOKEN", "")
     if not token:
-        print("::warning::llm-cost-lint: GITHUB_TOKEN not set — skipping PR comment", flush=True)
+        print("::warning::llm-cost-lint: no GitHub token available — skipping PR comment", flush=True)
         return
 
     repository = os.environ.get("GITHUB_REPOSITORY", "")
