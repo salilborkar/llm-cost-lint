@@ -98,19 +98,24 @@ To add a model, open a PR updating `config/pricing.yml` with the new entry.
 
 ## Known limitations
 
-**Input token counts are estimated.** Unless `max_tokens` is set as a direct keyword argument in the call, the parser falls back to `default-input-tokens`. System prompts, conversation history, and few-shot examples can make real prompt sizes 5–20x larger than the default.
+**Token counts are estimates, not invoices.** Input tokens fall back to 
+`default-input-tokens` when prompt size can't be inferred from source — real 
+prompts with system messages, conversation history, or few-shot examples can 
+be 5–20x larger. Output tokens use `max_tokens` as a ceiling, but most calls 
+return shorter responses. Treat the report as a directional cost check, not a 
+billing prediction.
 
-**Output token counts are ceilings, not actuals.** When `max_tokens` is extracted from source, that value is used as the output estimate — but many calls stop well short of it. The report may over-estimate output cost for calls where the model typically returns short responses.
+**Batch and cached inputs are not yet detected.** AWS Bedrock Batch Inference 
+and prompt caching can reduce real cost by 50–90% vs. on-demand. The action 
+prices everything at full on-demand rates, so projections will overstate cost 
+for batch- or cache-heavy workloads.
 
-**Streaming calls are priced identically to non-streaming.** The streaming vs standard API choice has no effect on per-token price, but streaming response lengths are harder to predict. The same `max_tokens` logic applies.
+**Regional and Data Zone deployments cost more.** Pricing is based on Azure 
+OpenAI Global rates. Regional or Data Zone deployments are roughly 10% higher.
 
-**Batch API calls are not yet detected.** AWS Bedrock Batch Inference and Azure OpenAI batch deployments are priced differently (typically 50% less than on-demand). They are not currently detected or priced.
-
-**Cached input pricing is not factored in.** AWS Bedrock Prompt Caching and Azure OpenAI's prompt caching reduce the effective input cost by 10–90% depending on cache hit rate. We always apply full on-demand input pricing.
-
-**Regional and Data Zone deployments cost more.** Azure OpenAI's pricing table shows Global deployment rates. If you use regional or Data Zone deployments, actual costs are approximately 10% higher than reported.
-
-**Pricing is hardcoded in `config/pricing.yml`.** When AWS or Azure change their rates, the file must be updated manually. Check the source URLs in the file header and open a PR if you notice stale pricing.
+**Pricing is hardcoded.** When AWS or Azure update their rates, 
+`config/pricing.yml` must be updated manually. Open a PR if you spot stale 
+pricing — the file header lists source URLs.
 
 ---
 
