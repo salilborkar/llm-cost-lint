@@ -18,8 +18,6 @@ jobs:
 
       - name: Run LLM Cost Lint
         uses: salilborkar/llm-cost-lint@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           # Directory or file to scan. '.' scans the entire repo recursively.
           # Change to 'src/' or 'app/' to limit the scan to your source tree.
